@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Math\FightTest.cs" />
     <Compile Include="Assets\Math\Vector2D.cs" />
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>D:/WorkSpace/github/MathVisual/MathVisual/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
