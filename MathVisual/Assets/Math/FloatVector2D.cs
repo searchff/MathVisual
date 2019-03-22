@@ -2,17 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FloatVector2D : MonoBehaviour
+namespace MV
 {
-    // Start is called before the first frame update
-    void Start()
+    public class FloatVector2D
     {
-        
+        float x = .0f;
+        float y = .0f;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
