@@ -7,120 +7,106 @@ namespace Fight
 {
     public class FightTest : EditorWindow
     {
-        private static FightTest window;
-        static GUISkin skin;
-        static GUIStyle style;
-        static GUIStyle style_on;
-        
-        ScaleBox sb;
-        ScaleBox sb2;
-        GridBG gbg;
-        FrameContainer fc;
-        FrameSprite fs;
-
-        [MenuItem("fight/draw test")]
-        private static void Init()//菜单打开时调用
+        static Color gridLineColor = new Color32(88, 88, 88, 255);
+        static Color oldGUIColor;
+        static Texture2D texture;
+        private static FightTest window = null;
+        static Rect rect;
+        //编译完的回调
+        //[UnityEditor.Callbacks.DidReloadScripts]
+        private static void OnScriptsReloaded()
         {
             if (EditorApplication.isPlaying)
             {
                 Debug.LogError("cannot be launched in Play mode.");
                 return;
             }
+
+            DestroyWindow();
+
+            window = CreateInstance<FightTest>();
             //创建窗口
-            Rect wr = new Rect(0, 0, 800, 600);
-            window = (FightTest)EditorWindow.GetWindow(typeof(FightTest));
-            window.title = "draw test";
+            rect = new Rect(200, 200, 800, 800);
+            //window = (FightTest)EditorWindow.GetWindow(typeof(FightTest));
+            //window.titleContent = "draw test";
+
+            //window.minSize = new Vector2(800, 800);
+            //window.maxSize = new Vector2(800, 800);
+            window.position = rect;
+            
+
+
+            texture = new Texture2D(1, 1);
+            texture.SetPixel(0, 0, Color.white);
+            texture.Apply();
+            texture.hideFlags = HideFlags.DontSave;
+
             window.Show();
-            //skin
-            string path = "Assets/Res/myskin.guiskin";
-            skin = (GUISkin)AssetDatabase.LoadAssetAtPath(path, typeof(GUISkin));
-            style = skin.FindStyle("listbox");
-            style_on = new GUIStyle(style);
-            style_on.normal.background = style.onNormal.background;
-            style_on.normal.textColor = style.onNormal.textColor;
-            style_on.hover.background = style.onHover.background;
-            style_on.hover.textColor = style.onHover.textColor;
-            style_on.active.background = style.onActive.background;
-            style_on.active.textColor = style.onActive.textColor;
-            style_on.focused.background = style.onFocused.background;
-            style_on.focused.textColor = style.onFocused.textColor;
 
-            //asset 
-            string strPath = "Assets/Res/FightData/verson.asset";
+            //window.ShowPopup();
 
-            //FrameData fd = ScriptableObject.CreateInstance<FrameData>();
-            //FrameOne f = new FrameOne();
-            //f.fName = "fram";
-            //f.num = 100;
-            //fd.fo = f;
-            //AssetDatabase.CreateAsset(fd, strPath);
-            //AssetDatabase.ImportAsset(strPath, ImportAssetOptions.ForceUpdate);
 
-            //AssetDatabase.Refresh();
-            //EditorUtility.SetDirty(fd);
-            //AssetDatabase.SaveAssets();
-            //
-            //EditorUtility.SetDirty(data); // tell unity to save the editor data prefab changes to disk
-            //AssetDatabase.SaveAssets(); // save assets now
-            //AssetDatabase.Refresh();
-            //return (T)AssetDatabase.LoadAssetAtPath(RelToAbsPath(relativePath), typeof(T));
-            //File.Exists(RelToAbsPath(relativePath));
+            //window.ShowUtility();
 
-            //FrameData fd = (FrameData)AssetDatabase.LoadAssetAtPath(strPath, typeof(FrameData));
-            //FrameOne f = fd.fo;
-           // Debug.Log(f.fName);
-            //Debug.Log(f.num);
+        }
 
-            //Rect rect = new Rect(2, 3, 10, 20);
-            //Debug.Log(rect.x);
-            //Debug.Log(rect.y);
-            //Debug.Log(rect.width);
-            //Debug.Log(rect.height);
-            //Debug.Log(rect.xMin);
-            //Debug.Log(rect.yMin);
-            //Debug.Log(rect.xMax);
-            //Debug.Log(rect.yMax);
+        void InitRes()
+        {
+
+        }
+
+        [ContextMenu("SetData")]
+        private void SetData()
+        {
+
+        }
+        [MenuItem("Math/ShowWindow")]
+        private static void Init()//菜单打开时调用
+        {
+            OnScriptsReloaded();
         }
 
         private void Update()
         {
-            this.Repaint();
+            //this.Repaint();
+            
+           
         }
-        private float sliderValue = 1.0f;
-        private float maxSliderValue = 10.0f;
-
-        public Vector2 scrollPosition;
-        public string longString = "This is a long-ish string";
-        Rect rect;
-        string path;
-        ListBox lb;
-
+       
+        private static void DestroyWindow()
+        {
+            if (window != null)
+            {
+                window.Close();
+                DestroyImmediate(window);
+                window = null;
+            }
+        }
         private void OnGUI()
         {
-            if (fc == null)
-            {
-                fc = new FrameContainer(skin);
-            }
-            fc.Display();
-        }
-        void HandleControll()
-        {
+            DrawTexture(rect, texture, gridLineColor);
+
             Event e = Event.current;
-            if (e.isMouse)
+            if (e != null)
             {
-                if (e.type == EventType.mouseDown)
+                if (e.isKey)
                 {
-                    if (e.button == 0)
+                    if (e.keyCode == KeyCode.Escape)
                     {
-                        if (RotatableFillBox.RectContains(new Rect(100f, 100f, 200f, 100f), e.mousePosition, 20f))
-                        {
-                            Debug.Log("in box");
-                        }
-                        else
-                            Debug.Log("out box");
+                        DestroyWindow();
                     }
                 }
             }
         }
+
+        static void DrawTexture(Rect rect, Texture2D texture, Color color)
+        {
+            Rect re = new Rect(0, 0, 800, 800);
+            oldGUIColor = GUI.color;
+            GUI.color = color;
+            GUI.DrawTexture(re, texture);
+            GUI.color = oldGUIColor;
+        }
+
     }
 }

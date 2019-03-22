@@ -60,8 +60,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Math\Defines.cs" />
     <Compile Include="Assets\Math\FightTest.cs" />
+    <Compile Include="Assets\Math\FloatVector2D.cs" />
+    <Compile Include="Assets\Math\Image\Background.cs" />
+    <Compile Include="Assets\Math\Image\ImageBase.cs" />
+    <Compile Include="Assets\Math\Image\LogicImage.cs" />
+    <Compile Include="Assets\Math\MainView.cs" />
     <Compile Include="Assets\Math\Vector2D.cs" />
+    <Compile Include="Assets\Math\ViewManager.cs" />
+    <Compile Include="Assets\Scripts\FunTest.cs" />
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>D:/WorkSpace/github/MathVisual/MathVisual/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
