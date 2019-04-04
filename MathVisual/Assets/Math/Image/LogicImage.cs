@@ -23,7 +23,10 @@ namespace MV
             }
 
         }
-
+        public void SetPixel(int x, int y, Color32 color)
+        {
+            data[x, y] = color;
+        }
         public void FillBlock(Color32[] block)
         {
             if(block.Length != width*height)

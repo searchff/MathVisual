@@ -60,12 +60,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Math\2d\IntVector2D.cs" />
     <Compile Include="Assets\Math\Defines.cs" />
     <Compile Include="Assets\Math\FightTest.cs" />
     <Compile Include="Assets\Math\FloatVector2D.cs" />
     <Compile Include="Assets\Math\Image\Background.cs" />
     <Compile Include="Assets\Math\Image\ImageBase.cs" />
     <Compile Include="Assets\Math\Image\LogicImage.cs" />
+    <Compile Include="Assets\Math\LineSegment.cs" />
     <Compile Include="Assets\Math\MainView.cs" />
     <Compile Include="Assets\Math\Vector2D.cs" />
     <Compile Include="Assets\Math\ViewManager.cs" />

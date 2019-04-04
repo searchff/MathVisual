@@ -30,7 +30,7 @@ namespace Fight
             //window = (FightTest)EditorWindow.GetWindow(typeof(FightTest));
             //window.titleContent = "draw test";
 
-            //window.minSize = new Vector2(800, 800);
+            window.minSize = new Vector2(800, 800);
             //window.maxSize = new Vector2(800, 800);
             window.position = rect;
             
